@@ -2,62 +2,55 @@ import json
 import speedtest
 
 class ListenNet(object):
-    def __init__(self):
-        """ listen = speedtest
-            ...
-            Run: 
-                speedtest-cli
-                speedtest-cli --simple
-                speedtest-cli --share
-            ...
-            font: 
-                https://pypi.org/project/speedtest-cli/
-                https://github.com/sivel/speedtest-cli/wiki
-                https://www.geeksforgeeks.org/test-internet-speed-using-python/
-                https://stackoverflow.com/questions/41716064/how-do-i-use-speedtest-cli-or-any-alternative-in-python-script-instead-of-comman
-        """
-        self.listen = speedtest.Speedtest() 
-        # If you want to test against a specific server
-        self.servers = []
-        # If you want to use a single threaded test
-        # self.threads = None
+    """ listen = speedtest
+        ...
+        Run: 
+            speedtest-cli
+            speedtest-cli --simple
+            speedtest-cli --share
+        ...
+        font: 
+            https://pypi.org/project/speedtest-cli/
+            https://github.com/sivel/speedtest-cli/wiki
+            https://www.geeksforgeeks.org/test-internet-speed-using-python/
+            https://stackoverflow.com/questions/41716064/how-do-i-use-speedtest-cli-or-any-alternative-in-python-script-instead-of-comman
+    """
+    listen = None
 
-    def get_internet_test(self):
-        """ -> Refactor
-            verificar o motivo que os métodos não acessam: 
-                - uns aos outros os atributos.
-                - os atributos
-        """    
-        self.provider()
-        self.best_server()
-        self.upload()
-        self.download()
+    def __init__(self):
+        self.listen = speedtest.Speedtest() # line 1073
 
     def set_servers(self, server):
         self.servers(server)
     def get_servers(self):
         return self.servers
 
-    # def set_threads(self, threads):
-    #     self.threads = threads
-    # def get_threads(self):
-    #     return self.threads
+    def get_internet_test(self):
+        """ -> Refactor
+            verificar o motivo que os métodos não acessam: 
+                - uns aos outros os atributos.
+                - os atributos
+        """        
+        self.servers()
+        self.best_server()
+        self.upload()
+        self.download()
 
-    def provider(self):
-        self.listen.get_servers(self.servers)
+    def servers(self):
+        servers = [] # If you want to test against a specific server
+        self.listen.get_servers(servers)
 
     def best_server(self):
         self.listen.get_best_server()
 
     def upload(self):
         # add feature: convert to megabytes 
-        # return self.listen.upload(threads=self.threads)
-        return self.listen.upload()
+        return self.listen.upload(threads=None)
 
     def download(self):
         # add feature: convert to megabytes 
-        # return self.listen.download(threads=self.threads)
-        return self.listen.download()
+        # If you want to use a single threaded test
+        return self.listen.download(threads=None)
 
     def share(self):
         self.get_internet_test()
