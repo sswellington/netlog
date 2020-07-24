@@ -36,6 +36,8 @@ pip install speedtest-cli
 curl -O https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py
 ~~~
 
+---
+
 ## Release
 ### v.0.0.1
 #### Feat:
@@ -47,6 +49,8 @@ curl -O https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.p
 #### License
 * MIT License for Apache License, Version 2.0 
 
+---
+
 ### Future Release 
 * add offline functionality
-
+* remove speedtest
